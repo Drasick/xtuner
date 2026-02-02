@@ -17,6 +17,7 @@ class JsonlWriter:
     def __init__(
         self,
         log_dir: str | Path | None = None,
+        **kwargs,
     ):
         if log_dir is None:
             log_dir = Path()
