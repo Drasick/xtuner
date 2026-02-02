@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Protocol
 
 from .jsonl_writer import JsonlWriter
+from .swanlab_writer import SwanlabWriter
 from .tb_writer import TensorboardWriter
 
 
@@ -33,13 +34,16 @@ def get_writer(
     *,
     writer_type: str,
     log_dir: str | Path | None = None,
+    **kwargs,
 ) -> Writer:
     if writer_type == "jsonl":
-        return JsonlWriter(log_dir=log_dir)
+        return JsonlWriter(log_dir=log_dir, **kwargs)
     elif writer_type == "tensorboard":
-        return TensorboardWriter(log_dir=log_dir)
+        return TensorboardWriter(log_dir=log_dir, **kwargs)
+    elif writer_type == "swanlab":
+        return SwanlabWriter(log_dir=log_dir, **kwargs)
     else:
         raise ValueError(f"Unknown writer type: {writer_type}")
 
 
-__all__ = ["JsonlWriter", "TensorboardWriter"]
+__all__ = ["JsonlWriter", "TensorboardWriter", "SwanlabWriter"]
