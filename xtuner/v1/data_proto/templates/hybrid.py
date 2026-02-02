@@ -22,6 +22,7 @@ class HybridChatTemplate(BaseModel):
     default_system: Optional[str] = None
     tool_prompt: str | None = None  # Tool prompt format
     tool_extractor: str | None = None  # Tool extractor format
+    tool: str | None = None  # Tool response format
 
     # only compute loss on the last assistant response ignoring the multiple rounds of assistant
     only_last_assistant_loss: bool = False  # gpt_oss is True
@@ -94,6 +95,12 @@ class HybridChatTemplate(BaseModel):
         if self.tool_extractor is None:
             raise ValueError("tool_extractor template is not defined.")
         return self.tool_extractor.format(tool_extractor=text)
+
+    def decorate_tool(self, text: str) -> str:
+        """Decorate text with the `tool` template."""
+        if self.tool is None:
+            raise ValueError("tool template is not defined.")
+        return self.tool.format(tool=text)
 
     def decorate_functions(self, text: str) -> str:
         """Decorate text with the `functions` template."""

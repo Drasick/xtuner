@@ -70,6 +70,15 @@ CHAT_TEMPLATE_MAP = {
         stop_words=["<|im_end|>", "<|endoftext|>"],
         sep="\n",
     ),
+    "qwen3-tool": HybridChatTemplate(
+        system="<|im_start|>system\n{system}<|im_end|>\n",
+        developer="<|im_start|>system\n{developer}<|im_end|>\n",
+        user="<|im_start|>user\n{user}<|im_end|>\n<|im_start|>assistant\n",
+        tool="<|im_start|>user\n<tool_response>\n{tool}\n</tool_response><|im_end|>\n<|im_start|>assistant\n",
+        assistant="{assistant}<|im_end|>",
+        stop_words=["<|im_end|>", "<|endoftext|>"],
+        sep="\n",
+    ),
     "gpt-oss": HybridChatTemplate(
         system="<|start|>system<|message|>{system}<|end|>",
         developer="<|start|>developer<|message|># Instructions\n\n{developer}\n\n<|end|>",

@@ -130,3 +130,9 @@ docs/zh_cn/api/generated/
 
 logs/
 !logs/.gitkeep
+
+GroupedGEMM/
+!GroupedGEMM/.gitkeep
+
+xtuner_train/
+

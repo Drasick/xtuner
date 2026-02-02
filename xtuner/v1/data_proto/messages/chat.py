@@ -135,7 +135,10 @@ class ChatMsg(BaseModel):
         elif self.role == "pretrain":
             prompt = text
         elif self.role == "tool":
-            prompt = chat_template.decorate_tool_extractor(text)
+            if isinstance(chat_template, HybridChatTemplate) and chat_template.tool is not None:
+                prompt = chat_template.decorate_tool(text)
+            else:
+                prompt = chat_template.decorate_tool_extractor(text)
         elif self.role == "assistant":
             if self.tool_calls is not None:
                 function_text = function_formatter(self.tool_calls)
