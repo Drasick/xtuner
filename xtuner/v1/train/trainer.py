@@ -481,6 +481,8 @@ class Trainer:
         hooks_config: HooksConfig = HooksConfig(),
         internal_metrics_cfg: InternalMetricsConfig | None = None,
     ):
+        self._config = trainer_cfg
+        
         self._do_clip = do_clip
         self._grad_norm_dtype = grad_norm_dtype
         self._dataloader_config = dataloader_cfg
